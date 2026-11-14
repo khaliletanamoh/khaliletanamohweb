@@ -16,14 +16,14 @@ export default function Hero() {
       id="home"
       className="relative isolate flex min-h-[88svh] items-center overflow-hidden bg-[#050b18] pt-28 pb-20 sm:min-h-screen"
     >
-      {/* Decorative hero artwork; keep the image in public/images/hero-background.png. */}
+      {/* Use the existing portrait asset as the hero background. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-20 bg-cover bg-[center_30%] bg-no-repeat sm:bg-center"
-        style={{ backgroundImage: "url('/images/hero-background.png')" }}
+        style={{ backgroundImage: "url('/images/photo.jpg')" }}
       />
 
-      {/* Contrast overlays keep the text readable while revealing the uploaded artwork. */}
+      {/* Contrast overlays keep the text readable while revealing the artwork. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,8,23,0.94)_0%,rgba(3,8,23,0.84)_38%,rgba(3,8,23,0.42)_68%,rgba(3,8,23,0.12)_100%)]"
