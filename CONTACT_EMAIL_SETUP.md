@@ -1,24 +1,15 @@
-# Gmail contact form email setup
+# Zoho SMTP contact form setup
 
-The contact form sends messages through the Gmail API. It does not use a Gmail password or app password; configure OAuth credentials and keep them private on the server.
+The contact form delivers messages through Zoho's SMTP service over implicit TLS on port 465. The SMTP username is used as the sender, and submissions are delivered to `CONTACT_TO_EMAIL`. The visitor's email is set as `Reply-To`.
 
-## Required environment variables
+Configure these values in your local `.env.local` and in the server-side environment settings for your hosting provider:
 
-Add these to `.env.local` for local development and to your hosting provider's production environment:
+- `SMTP_HOST=smtp.zoho.com`
+- `SMTP_PORT=465`
+- `SMTP_SECURE=true`
+- `SMTP_USER` = your Zoho Mail account address
+- `SMTP_PASSWORD` = your Zoho app-specific password (use an app password if multi-factor authentication is enabled)
+- `CONTACT_TO_EMAIL` = the inbox that should receive messages
+- `NEXT_PUBLIC_SITE_URL=https://khaliletanamoh.com`
 
-- `GMAIL_CLIENT_ID` = Google OAuth client ID
-- `GMAIL_CLIENT_SECRET` = Google OAuth client secret
-- `GMAIL_REFRESH_TOKEN` = refresh token for the Gmail account that sends mail
-- `CONTACT_TO_EMAIL` = `khaliletana641@gmail.com`
-- `NEXT_PUBLIC_SITE_URL` = `https://khaliletanamoh.com`
-
-## Google setup
-
-1. Create or select a Google Cloud project.
-2. Enable the Gmail API.
-3. Configure the OAuth consent screen.
-4. Create OAuth credentials and keep the client ID and client secret private.
-5. Generate a refresh token with the Gmail send scope (`https://www.googleapis.com/auth/gmail.send`).
-6. Restart the app or redeploy after saving these values.
-
-The values above are already set for your live site domain and recipient email.
+Never commit `.env.local` or publish the SMTP password in frontend code or a `NEXT_PUBLIC_` variable. If an SMTP password has been shared in chat, rotate/revoke it in Zoho Mail immediately and use a newly generated password only in your private deployment settings. Restart or redeploy the app after configuring the variables.
