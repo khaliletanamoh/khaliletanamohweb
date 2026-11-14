@@ -83,13 +83,13 @@ export const portfolioData = {
     {
       title: "Android Developer",
       provider: "Udacity",
-      credentialUrl: "http://www.udacity.com/certificate/e/68d6588a-d408-11f0-964b-aba8e9d1ea45",
+      credentialUrl: "https://www.udacity.com/certificate/e/68d6588a-d408-11f0-964b-aba8e9d1ea45",
       previewUrl: "/certificates/Androiddeveloper.pdf",
     },
     {
       title: "Programming Fundamentals",
       provider: "Udacity",
-      credentialUrl: "http://www.udacity.com/certificate/e/e91fa7d0-d52f-11f0-b864-37bf57a56fbb",
+      credentialUrl: "https://www.udacity.com/certificate/e/e91fa7d0-d52f-11f0-b864-37bf57a56fbb",
       previewUrl: "/certificates/Programming-fundamentals.pdf",
     },
     {
