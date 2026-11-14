@@ -1,4 +1,3 @@
-
 import {
   BriefcaseBusiness,
   GraduationCap,
@@ -117,33 +116,42 @@ export default function Experience() {
             <h3 className="text-2xl font-bold">Certifications</h3>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {portfolioData.certifications.map((certificate, index) => (
-              <article key={certificate.credentialUrl} className="card">
-                <span className="text-xs font-bold text-teal-400">
-                  CERTIFICATE 0{index + 1}
-                </span>
+          {portfolioData.certifications.length > 0 ? (
+            <div className="grid gap-5 md:grid-cols-3">
+              {portfolioData.certifications.map((certificate, index) => (
+                <article key={certificate.credentialUrl} className="card">
+                  <span className="text-xs font-bold text-teal-400">
+                    CERTIFICATE 0{index + 1}
+                  </span>
 
-                <h4 className="mt-5 text-lg font-bold">
-                  {certificate.title}
-                </h4>
+                  <h4 className="mt-5 text-lg font-bold">
+                    {certificate.title}
+                  </h4>
 
-                <p className="mt-2 text-sm text-gray-400">
-                  {certificate.provider}
-                </p>
+                  <p className="mt-2 text-sm text-gray-400">
+                    {certificate.provider}
+                  </p>
 
-                <a
-                  href={certificate.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:gap-3"
-                >
-                  Verify Certificate
-                  <ArrowUpRight size={16} />
-                </a>
-              </article>
-            ))}
-          </div>
+                  <a
+                    href={certificate.credentialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:gap-3"
+                  >
+                    Verify Certificate
+                    <ArrowUpRight size={16} />
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-dashed border-white/10 bg-white/5 p-6 text-sm leading-7 text-gray-400">
+              No certificates have been added yet. Add them to
+              <span className="font-medium text-gray-200"> data/portfolio.ts </span>
+              under <span className="font-medium text-teal-400">certifications</span>
+              to show them here.
+            </div>
+          )}
         </div>
       </div>
     </section>
