@@ -79,11 +79,13 @@ export const portfolioData = {
       period: "In progress",
     },
   ],
-  certifications: [] as {
-    title: string;
-    provider: string;
-    credentialUrl: string;
-  }[],
+  certifications: [
+    {
+      title: "Certificate of Completion",
+      provider: "Udacity",
+      credentialUrl: "http://www.udacity.com/certificate/e/68d6588a-d408-11f0-964b-aba8e9d1ea45",
+    },
+  ],
   process: [
     {
       number: "01",
