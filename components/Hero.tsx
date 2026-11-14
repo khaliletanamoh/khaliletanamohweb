@@ -1,4 +1,3 @@
-
 import {
   ArrowDown,
   ArrowUpRight,
@@ -90,7 +89,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Visual identity panel */}
+          {/* Personal photo and visual identity */}
           <div className="relative mx-auto w-full max-w-md">
             <div className="absolute -inset-5 rounded-3xl bg-gradient-to-br from-blue-500/20 to-teal-400/10 blur-2xl" />
 
@@ -103,12 +102,16 @@ export default function Hero() {
                 <span className="h-2 w-2 rounded-full bg-teal-400" />
               </div>
 
-              <div className="my-14">
-                <p className="font-[var(--font-space)] text-8xl font-bold tracking-tighter text-white/10">
-                  KE
-                </p>
+              <div className="my-10 flex flex-col items-center text-center">
+                <img
+                  src="/images/favicon.ico"
+                  alt={`${personal.name} personal photo`}
+                  width={160}
+                  height={160}
+                  className="h-40 w-40 rounded-full border border-white/10 bg-white/5 object-cover p-2 shadow-lg shadow-teal-400/10"
+                />
 
-                <h2 className="mt-5 text-3xl font-bold">
+                <h2 className="mt-8 text-3xl font-bold">
                   Engineering
                   <br />
                   <span className="gradient-text">Meets Technology.</span>
