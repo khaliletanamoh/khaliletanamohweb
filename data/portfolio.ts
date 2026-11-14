@@ -91,7 +91,7 @@ export const portfolioData = {
       credentialUrl: "http://www.udacity.com/certificate/e/e91fa7d0-d52f-11f0-b864-37bf57a56fbb",
     },
     {
-      title: "Udacity Certificate",
+      title: "Certificate of Completion",
       provider: "Udacity",
       credentialUrl: "https://www.udacity.com/certificate/lp/dd355278-abc4-488f-8e6b-d25d0241a830",
     },
