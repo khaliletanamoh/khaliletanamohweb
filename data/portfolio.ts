@@ -85,6 +85,21 @@ export const portfolioData = {
       provider: "Udacity",
       credentialUrl: "http://www.udacity.com/certificate/e/68d6588a-d408-11f0-964b-aba8e9d1ea45",
     },
+    {
+      title: "Certificate of Completion",
+      provider: "Udacity",
+      credentialUrl: "http://www.udacity.com/certificate/e/e91fa7d0-d52f-11f0-b864-37bf57a56fbb",
+    },
+    {
+      title: "Udacity Certificate",
+      provider: "Udacity",
+      credentialUrl: "https://www.udacity.com/certificate/lp/dd355278-abc4-488f-8e6b-d25d0241a830",
+    },
+    {
+      title: "Tutor Certificate",
+      provider: "UpCourses",
+      credentialUrl: "https://upcourses.org/tutor-certificate?cert_hash=d084300fb25586d5",
+    },
   ],
   process: [
     {
