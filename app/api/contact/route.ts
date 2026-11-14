@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -32,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate required fields.
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "Please complete all required fields." },
         { status: 400 }

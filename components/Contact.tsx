@@ -61,7 +61,7 @@ export default function Contact() {
 
       setStatus({
         type: "success",
-        message: "Your message was submitted successfully. Thank you!",
+        message: "Your message has been sent by email. Thank you!",
       });
 
       setForm({
@@ -282,13 +282,13 @@ export default function Contact() {
             </button>
 
             <p className="text-xs leading-6 text-gray-500">
-              Your message will be sent through the portfolio contact
-              service. Email delivery requires the service configuration
-              to be completed.
+              Messages are delivered to {personal.email}. Email delivery
+              requires the Resend environment variables to be configured;
+              see CONTACT_EMAIL_SETUP.md.
             </p>
           </form>
         </div>
       </div>
     </section>
   );
-      }
+}
