@@ -1,148 +1,40 @@
-import {
-  ArrowUpRight,
-  Award,
-  BookOpen,
-  BriefcaseBusiness,
-  GraduationCap,
-} from "lucide-react";
-
+import { ArrowUpRight, Award, BookOpen, BriefcaseBusiness, GraduationCap, ExternalLink } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
+import { homeCopy } from "@/data/redesign";
 
 export default function Experience() {
+  const education = portfolioData.education[0];
   return (
-    <section id="experience" className="section bg-[#0d121c]">
+    <section id="certifications" className="section-shell scroll-mt-[var(--header-height)]">
       <div className="container">
-        <div className="section-heading">
-          <p className="eyebrow">MY JOURNEY</p>
-          <h2 className="heading">
-            Building solutions through
-            <span className="gradient-text"> engineering and technology.</span>
-          </h2>
-          <p className="section-description">
-            My journey combines Industrial Engineering, software development,
-            and continuous learning. I focus on transforming ideas into
-            practical digital solutions while developing my technical and
-            problem-solving abilities.
-          </p>
+        <div className="section-heading-row mb-8"><div><span className="section-badge">{homeCopy.credentials.badge}</span><h2 className="section-title mt-4"><span className="text-yellow-400">Certifications</span> &amp; Journey</h2><p className="section-description mt-3">Verified credentials and the learning path documented in my portfolio.</p></div><a href="#certificate-list" className="btn btn-outline hidden shrink-0 sm:inline-flex">View Certificates <ArrowUpRight size={16} /></a></div>
+        <div className="grid gap-5 lg:grid-cols-[.9fr_1.1fr]">
+          <article className="glass-card p-5 sm:p-6">
+            <div className="flex items-center gap-3"><span className="flex h-11 w-11 items-center justify-center rounded-xl bg-yellow-400/10 text-yellow-300"><Award size={22} /></span><div><h3 className="font-bold">Credentials</h3><p className="text-xs text-[var(--muted)]">{portfolioData.certifications.length} certificates listed</p></div></div>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">Each credential links to its issuer’s verification page. Preview artwork is not available in the repository yet.</p>
+            <div className="certificate-placeholder mt-5 flex min-h-44 flex-col items-center justify-center rounded-2xl border border-dashed border-blue-400/35 px-5 text-center">
+              <Award size={30} className="text-blue-300" /><p className="mt-3 font-semibold">Certificates &amp; learning</p><p className="mt-1 text-xs text-[var(--muted)]">Open a credential below to verify it with the issuer.</p>
+            </div>
+            <a href="#certificate-list" className="btn btn-primary mt-5 w-full justify-center">View Certificates <ArrowUpRight size={16} /></a>
+          </article>
+          <article className="glass-card p-5 sm:p-6">
+            <div className="flex items-center gap-3"><span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-300"><BriefcaseBusiness size={21} /></span><div><h3 className="font-bold">Experience &amp; education</h3><p className="text-xs text-[var(--muted)]">Current journey, using documented details</p></div></div>
+            <div className="relative mt-6 space-y-6 border-l border-blue-500/40 pl-5">
+              {education && <div className="relative"><span className="absolute -left-[1.63rem] top-1.5 h-3 w-3 rounded-full border-2 border-blue-300 bg-[var(--surface)]" /><p className="text-xs font-semibold text-blue-300">{education.period}</p><h4 className="mt-1 text-sm font-bold">{education.qualification} student</h4><p className="mt-1 text-xs text-[var(--muted)]">{education.institution}</p></div>}
+              {portfolioData.experience.length > 0 ? portfolioData.experience.map((item) => <div className="relative" key={`${item.role}-${item.organization}`}><span className="absolute -left-[1.63rem] top-1.5 h-3 w-3 rounded-full border-2 border-blue-300 bg-[var(--surface)]" /><p className="text-xs font-semibold text-blue-300">{item.period}</p><h4 className="mt-1 text-sm font-bold">{item.role}</h4><p className="mt-1 text-xs text-[var(--muted)]">{item.organization}</p><p className="mt-2 text-xs leading-5 text-[var(--muted)]">{item.description}</p></div>) : <div className="relative"><span className="absolute -left-[1.63rem] top-1.5 h-3 w-3 rounded-full border-2 border-blue-300 bg-[var(--surface)]" /><p className="text-xs font-semibold text-blue-300">Ongoing</p><h4 className="mt-1 text-sm font-bold">Independent web projects</h4><p className="mt-1 text-xs leading-5 text-[var(--muted)]">Building and sharing personal projects listed in the portfolio.</p></div>}
+            </div>
+          </article>
         </div>
-
-        <div className="mb-16 sm:mb-20">
-          <div className="mb-7 flex items-center gap-3 sm:mb-9">
-            <BriefcaseBusiness className="text-teal-400" size={23} />
-            <h3 className="text-xl font-bold sm:text-2xl">Experience</h3>
-          </div>
-          <div className="space-y-5 sm:space-y-6">
-            {portfolioData.experience.map((item, index) => (
-              <article key={item.role} className="card relative">
-                <div className="flex flex-col justify-between gap-4 sm:flex-row">
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-teal-400">
-                      0{index + 1} / {item.period}
-                    </span>
-                    <h4 className="mt-3 text-lg font-bold sm:text-xl">{item.role}</h4>
-                    <p className="mt-1 text-sm text-blue-400">{item.organization}</p>
-                  </div>
-                </div>
-                <p className="mt-5 text-sm leading-7 text-gray-400">{item.description}</p>
-                <ul className="mt-5 space-y-3">
-                  {item.responsibilities.map((responsibility) => (
-                    <li key={responsibility} className="flex items-start gap-3 text-sm text-gray-400">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400" />
-                      <span>{responsibility}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-          <p className="mt-7 text-sm font-semibold leading-6 text-teal-400">
-            My approach: Think systematically. Build creatively. Solve practically.
-          </p>
-        </div>
-
-        <div className="mb-16 sm:mb-20">
-          <div className="mb-7 flex items-center gap-3 sm:mb-8">
-            <GraduationCap className="text-teal-400" size={24} />
-            <h3 className="text-xl font-bold sm:text-2xl">Education</h3>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-            {portfolioData.education.map((item) => (
-              <article key={item.institution} className="card">
-                <BookOpen size={25} className="text-blue-400" />
-                <h4 className="mt-5 text-lg font-bold">{item.qualification}</h4>
-                <p className="mt-2 text-sm leading-6 text-gray-400">{item.institution}</p>
-                <p className="mt-4 text-xs text-teal-400">{item.period}</p>
-              </article>
-            ))}
+        <div id="certificate-list" className="mt-8 scroll-mt-[var(--header-height)]">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><GraduationCap size={20} className="text-blue-300" />Verified certificates</h3>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {portfolioData.certifications.map((certificate) => <article key={certificate.credentialUrl} className="glass-card flex min-w-0 flex-col p-4">
+              <div className="flex items-start gap-3"><BookOpen size={18} className="mt-0.5 shrink-0 text-blue-300" /><div className="min-w-0"><h4 className="break-words text-sm font-semibold">{certificate.title}</h4><p className="mt-1 text-xs text-[var(--muted)]">{certificate.provider}</p></div></div>
+              <a href={certificate.credentialUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-blue-300 hover:text-blue-200">Verify certificate <ExternalLink size={14} /></a>
+            </article>)}
           </div>
         </div>
-
-        <div>
-          <div className="mb-7 flex items-center gap-3 sm:mb-8">
-            <Award className="text-teal-400" size={24} />
-            <h3 className="text-xl font-bold sm:text-2xl">Certificates &amp; credentials</h3>
-          </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
-            {portfolioData.certifications.map((certificate) => {
-              const isPdf = certificate.previewUrl.toLowerCase().endsWith(".pdf");
-
-              return (
-                <article
-                  key={certificate.credentialUrl}
-                  className="min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-[#101622] shadow-lg shadow-black/10"
-                >
-                  <div className="relative flex aspect-[1.42/1] flex-col justify-between overflow-hidden bg-gradient-to-br from-white via-slate-50 to-slate-200 p-3 text-slate-900 sm:p-4">
-                    <div className="absolute -left-12 -top-14 h-44 w-44 rounded-full border-[18px] border-teal-700/10" />
-                    <div className="absolute -bottom-20 -right-10 h-48 w-48 rounded-full border-[22px] border-amber-500/10" />
-
-                    <div className="relative z-10 min-h-0 flex-1 overflow-hidden rounded-lg border border-slate-300 bg-white">
-                      {isPdf ? (
-                        <iframe
-                          src={`${certificate.previewUrl}#toolbar=0&navpanes=0`}
-                          title={`${certificate.title} certificate preview`}
-                          className="h-full min-h-0 w-full"
-                        />
-                      ) : (
-                        <img
-                          src={certificate.previewUrl}
-                          alt={`${certificate.title} certificate`}
-                          className="h-full w-full object-contain"
-                          loading="lazy"
-                        />
-                      )}
-                    </div>
-
-                    <div className="relative z-10 mt-2 flex items-center justify-between gap-2 border-t border-slate-300/80 pt-2">
-                      <span className="truncate text-[9px] font-bold uppercase tracking-[0.15em] text-teal-800 sm:text-[10px] sm:tracking-[0.2em]">
-                        {certificate.provider}
-                      </span>
-                      <span className="shrink-0 rounded-full border border-teal-800/20 px-2 py-1 text-[9px] font-semibold uppercase tracking-wider text-teal-800">
-                        Credential
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 sm:p-5">
-                    <h4 className="break-words text-base font-semibold leading-6 text-white">
-                      {certificate.title}
-                    </h4>
-                    <p className="mt-1 text-sm text-gray-400">Issued by {certificate.provider}</p>
-                    <a
-                      href={certificate.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Verify ${certificate.title} certificate from ${certificate.provider}`}
-                      className="btn btn-primary mt-4 inline-flex min-h-11 w-full justify-center"
-                    >
-                      Verify credential
-                      <ArrowUpRight size={17} />
-                    </a>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
+        <p className="mt-5 text-xs leading-5 text-[var(--muted)]">Testimonials are omitted because no testimonial text or author is present in the supplied portfolio data.</p>
       </div>
     </section>
   );

@@ -1,95 +1,29 @@
-
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://khaliletanamoh.com"),
-
-  title: {
-    default: "Khalil Etana | Industrial Engineer & Full-Stack Web Developer",
-    template: "%s | Khalil Etana",
-  },
-
-  description:
-    "Explore the portfolio of Khalil Etana, an Industrial Engineer and Full-Stack Web Developer interested in engineering, technology, problem solving, and digital solutions.",
-
+  title: { default: "Khalil Etana | Industrial Engineer & Full-Stack Web Developer", template: "%s | Khalil Etana" },
+  description: "Explore the portfolio of Khalil Etana, an Industrial Engineer and Full-Stack Web Developer interested in engineering, technology, problem solving, and digital solutions.",
   applicationName: "Khalil Etana Portfolio",
-
   authors: [{ name: "Khalil Etana" }],
-
   creator: "Khalil Etana",
-
-  keywords: [
-    "Khalil Etana",
-    "Industrial Engineer",
-    "Full-Stack Web Developer",
-    "Web Development",
-    "Engineering",
-    "Digital Solutions",
-    "Problem Solving",
-    "Ethiopia",
-  ],
-
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://khaliletanamoh.com",
-    siteName: "Khalil Etana",
-    title: "Khalil Etana | Industrial Engineer & Full-Stack Web Developer",
-    description:
-      "Engineering mindset meets technology. Explore my projects, skills, and professional journey.",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Khalil Etana | Portfolio",
-    description:
-      "Industrial Engineer & Full-Stack Web Developer.",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-  },
+  keywords: ["Khalil Etana", "Industrial Engineer", "Full-Stack Web Developer", "Web Development", "Engineering", "Digital Solutions", "Problem Solving", "Ethiopia"],
+  openGraph: { type: "website", locale: "en_US", url: "https://khaliletanamoh.com", siteName: "Khalil Etana", title: "Khalil Etana | Industrial Engineer & Full-Stack Web Developer", description: "Engineering mindset meets technology. Explore my projects, skills, and professional journey." },
+  twitter: { card: "summary_large_image", title: "Khalil Etana | Portfolio", description: "Industrial Engineer & Full-Stack Web Developer." },
+  robots: { index: true, follow: true },
+  icons: { icon: "/favicon.ico" },
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#080b12",
-};
+export const viewport = { width: "device-width", initialScale: 1, themeColor: "#040a18" };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
-      >
-        {children}
-        <SpeedInsights />
-      </body>
-    </html>
-  );
+const themeScript = `try { var t = localStorage.getItem('portfolio-theme'); document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>{children}<SpeedInsights /></body></html>;
 }
