@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
+function base64UrlEncode(value: string) {
+  return Buffer.from(value)
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -25,12 +33,11 @@ export async function POST(request: NextRequest) {
     const honeypot =
       typeof body.website === "string" ? body.website : "";
 
-    // Reject automated bot submissions.
+    // Silently accept automated bot submissions without sending email.
     if (honeypot) {
       return NextResponse.json({ success: true });
     }
 
-    // Validate required fields.
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "Please complete all required fields." },
@@ -59,7 +66,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check that the request comes from your website.
     const origin = request.headers.get("origin");
     const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL;
 
@@ -75,41 +81,80 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
+    const clientId = process.env.GMAIL_CLIENT_ID;
+    const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+    const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
     const toEmail = process.env.CONTACT_TO_EMAIL;
-    const fromEmail = process.env.CONTACT_FROM_EMAIL;
 
-    if (!apiKey || !toEmail || !fromEmail) {
+    if (!clientId || !clientSecret || !refreshToken || !toEmail) {
       return NextResponse.json(
-        { error: "The contact service is not configured yet." },
+        { error: "The Gmail contact service is not configured yet." },
         { status: 503 }
       );
     }
 
-    const response = await fetch("https://api.resend.com/emails", {
+    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [toEmail],
-        reply_to: email,
-        subject: `Portfolio message: ${subject}`,
-        text: [
-          `Name: ${name}`,
-          `Email: ${email}`,
-          "",
-          "Message:",
-          message,
-        ].join("\n"),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        client_id: clientId,
+        client_secret: clientSecret,
+        refresh_token: refreshToken,
+        grant_type: "refresh_token",
       }),
+      cache: "no-store",
     });
 
-    if (!response.ok) {
-      console.error("Email service returned an error:", response.status);
+    if (!tokenResponse.ok) {
+      console.error("Google OAuth token refresh failed:", tokenResponse.status);
+      return NextResponse.json(
+        { error: "Unable to connect to Gmail. Please try again later." },
+        { status: 502 }
+      );
+    }
 
+    const tokenData = await tokenResponse.json();
+    const accessToken = tokenData.access_token as string | undefined;
+
+    if (!accessToken) {
+      console.error("Google OAuth response did not contain an access token.");
+      return NextResponse.json(
+        { error: "Unable to connect to Gmail. Please try again later." },
+        { status: 502 }
+      );
+    }
+
+    // Prevent header injection while preserving the original values in the body.
+    const safeSubject = subject.replace(/[\r\n]+/g, " ");
+    const rawEmail = [
+      `To: ${toEmail}`,
+      `Reply-To: ${email.replace(/[\r\n]+/g, "")}`,
+      `Subject: Portfolio message: ${safeSubject}`,
+      "MIME-Version: 1.0",
+      "Content-Type: text/plain; charset=UTF-8",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      "",
+      "Message:",
+      message,
+    ].join("\r\n");
+
+    const gmailResponse = await fetch(
+      "https://gmail.googleapis.com/gmail/v1/users/me/messages/send",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ raw: base64UrlEncode(rawEmail) }),
+        cache: "no-store",
+      }
+    );
+
+    if (!gmailResponse.ok) {
+      console.error("Gmail API send failed:", gmailResponse.status);
       return NextResponse.json(
         { error: "Unable to send your message. Please try again later." },
         { status: 502 }

@@ -84,7 +84,7 @@ export default function Contact() {
     }
   };
 
-  const { personal, contact } = portfolioData;
+  const { personal } = portfolioData;
 
   return (
     <section id="contact" className="section">
@@ -108,14 +108,12 @@ export default function Contact() {
             <div className="card h-full">
               <Mail className="mb-5 text-teal-400" size={30} />
 
-              <h3 className="text-2xl font-semibold">
-                Get in touch
-              </h3>
+              <h3 className="text-2xl font-semibold">Get in touch</h3>
 
               <p className="mt-4 leading-7 text-gray-400">
-                Whether you are interested in web development,
-                engineering, collaboration, or professional
-                opportunities, feel free to reach out.
+                Whether you are interested in web development, engineering,
+                collaboration, or professional opportunities, feel free to
+                reach out.
               </p>
 
               <a
@@ -152,13 +150,9 @@ export default function Contact() {
 
           <form onSubmit={handleSubmit} className="card space-y-5">
             <div>
-              <label
-                htmlFor="name"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="name" className="mb-2 block text-sm font-medium">
                 Your name
               </label>
-
               <input
                 id="name"
                 name="name"
@@ -173,13 +167,9 @@ export default function Contact() {
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="email" className="mb-2 block text-sm font-medium">
                 Email address
               </label>
-
               <input
                 id="email"
                 name="email"
@@ -194,13 +184,9 @@ export default function Contact() {
             </div>
 
             <div>
-              <label
-                htmlFor="subject"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="subject" className="mb-2 block text-sm font-medium">
                 Subject
               </label>
-
               <input
                 id="subject"
                 name="subject"
@@ -215,13 +201,9 @@ export default function Contact() {
             </div>
 
             <div>
-              <label
-                htmlFor="message"
-                className="mb-2 block text-sm font-medium"
-              >
+              <label htmlFor="message" className="mb-2 block text-sm font-medium">
                 Your message
               </label>
-
               <textarea
                 id="message"
                 name="message"
@@ -235,7 +217,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Honeypot field for basic spam protection */}
             <div className="hidden" aria-hidden="true">
               <label htmlFor="website">Leave this field empty</label>
               <input
@@ -282,9 +263,8 @@ export default function Contact() {
             </button>
 
             <p className="text-xs leading-6 text-gray-500">
-              Messages are delivered to {personal.email}. Email delivery
-              requires the Resend environment variables to be configured;
-              see CONTACT_EMAIL_SETUP.md.
+              Messages are delivered to {personal.email} through Gmail. See
+              CONTACT_EMAIL_SETUP.md for the required secure configuration.
             </p>
           </form>
         </div>
