@@ -1,6 +1,7 @@
 import {
   ArrowDown,
   ArrowUpRight,
+  Check,
   Code2,
   Cpu,
   Github,
@@ -14,6 +15,12 @@ import {
 import { portfolioData } from "@/data/portfolio";
 
 const skillTags = ["Next.js", "React", "TypeScript", "Industrial Engineering"];
+
+const processSteps = [
+  { number: "01", title: "Think", detail: "Understand the challenge" },
+  { number: "02", title: "Build", detail: "Create with purpose" },
+  { number: "03", title: "Improve", detail: "Refine for real impact" },
+];
 
 export default function Hero() {
   const { personal, hero } = portfolioData;
@@ -107,60 +114,72 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Custom visual card: engineering meets software, with no external image. */}
+          {/* A clear, visitor-friendly visual instead of decorative code. */}
           <div className="relative mx-auto w-full max-w-[34rem] lg:justify-self-end">
             <div aria-hidden="true" className="absolute inset-10 rounded-full bg-cyan-400/10 blur-[90px]" />
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1220]/85 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-6">
-              <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-                <div className="flex items-center gap-2" aria-hidden="true">
-                  <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-amber-300/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0b1220]/85 p-5 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-7">
+              <div className="flex items-center justify-between gap-3 border-b border-white/[0.08] pb-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-teal-300">Engineering × technology</p>
+                  <h2 className="mt-2 text-lg font-semibold text-white sm:text-xl">Ideas into impact</h2>
                 </div>
-                <span className="font-mono text-[10px] tracking-[0.18em] text-gray-500 sm:text-xs">
-                  ENGINEERING × TECHNOLOGY
-                </span>
-              </div>
-
-              <div className="relative mt-5 overflow-hidden rounded-2xl border border-cyan-300/10 bg-[#070d18] p-5 sm:p-7">
-                <div aria-hidden="true" className="absolute -right-10 -top-14 h-48 w-48 rounded-full border border-cyan-300/[0.08]" />
-                <div aria-hidden="true" className="absolute -right-2 -top-6 h-32 w-32 rounded-full border border-blue-300/[0.08]" />
-
-                <div className="relative flex items-center justify-between">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500">A thoughtful approach</p>
-                    <p className="mt-2 font-mono text-sm text-teal-200">&lt;solution /&gt;</p>
-                  </div>
-                  <div className="rounded-xl border border-cyan-300/15 bg-cyan-300/[0.07] p-3 text-cyan-200">
-                    <Code2 size={21} />
-                  </div>
-                </div>
-
-                <div className="relative mt-7 space-y-3 font-mono text-xs leading-6 sm:text-sm">
-                  <p className="text-gray-500"><span className="text-fuchsia-300">const</span> approach = &#123;</p>
-                  <p className="pl-4 text-gray-300 sm:pl-6">mindset: <span className="text-amber-200">"systems thinking"</span>,</p>
-                  <p className="pl-4 text-gray-300 sm:pl-6">tools: <span className="text-emerald-300">"modern web"</span>,</p>
-                  <p className="pl-4 text-gray-300 sm:pl-6">focus: <span className="text-cyan-200">"useful solutions"</span></p>
-                  <p className="text-gray-500">&#125;;</p>
-                </div>
-
-                <div className="relative mt-7 grid grid-cols-3 gap-2.5 sm:gap-3">
-                  <div className="rounded-xl border border-blue-300/10 bg-blue-400/[0.06] p-3 sm:p-4">
-                    <Code2 size={18} className="text-blue-300" />
-                    <p className="mt-2 text-[9px] font-semibold uppercase tracking-wider text-gray-400 sm:text-[10px]">Software</p>
-                  </div>
-                  <div className="rounded-xl border border-teal-300/10 bg-teal-400/[0.06] p-3 sm:p-4">
-                    <Cpu size={18} className="text-teal-300" />
-                    <p className="mt-2 text-[9px] font-semibold uppercase tracking-wider text-gray-400 sm:text-[10px]">Engineering</p>
-                  </div>
-                  <div className="rounded-xl border border-violet-300/10 bg-violet-400/[0.06] p-3 sm:p-4">
-                    <Layers3 size={18} className="text-violet-300" />
-                    <p className="mt-2 text-[9px] font-semibold uppercase tracking-wider text-gray-400 sm:text-[10px]">Solutions</p>
-                  </div>
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.07] text-cyan-200">
+                  <Sparkles size={20} />
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2">
+              <p className="mt-5 max-w-sm text-sm leading-6 text-gray-400">
+                Combining engineering thinking and modern web development to create useful, thoughtful solutions.
+              </p>
+
+              <div className="mt-7 grid grid-cols-3 gap-3">
+                <div className="rounded-2xl border border-blue-300/10 bg-blue-400/[0.06] p-3.5 sm:p-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-300/10 text-blue-200">
+                    <Cpu size={19} />
+                  </div>
+                  <p className="mt-3 text-xs font-semibold text-white">Engineering</p>
+                  <p className="mt-1 text-[10px] leading-4 text-gray-500">Think in systems</p>
+                </div>
+                <div className="rounded-2xl border border-teal-300/10 bg-teal-400/[0.06] p-3.5 sm:p-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-300/10 text-teal-200">
+                    <Code2 size={19} />
+                  </div>
+                  <p className="mt-3 text-xs font-semibold text-white">Technology</p>
+                  <p className="mt-1 text-[10px] leading-4 text-gray-500">Build for people</p>
+                </div>
+                <div className="rounded-2xl border border-violet-300/10 bg-violet-400/[0.06] p-3.5 sm:p-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-300/10 text-violet-200">
+                    <Layers3 size={19} />
+                  </div>
+                  <p className="mt-3 text-xs font-semibold text-white">Solutions</p>
+                  <p className="mt-1 text-[10px] leading-4 text-gray-500">Make an impact</p>
+                </div>
+              </div>
+
+              <div className="mt-7 rounded-2xl border border-white/[0.08] bg-white/[0.025] p-4 sm:p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <p className="text-xs font-semibold text-gray-200">How I work</p>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-medium text-teal-300">
+                    <Check size={12} /> Purposeful process
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {processSteps.map((step, index) => (
+                    <div key={step.number} className="relative">
+                      {index < processSteps.length - 1 && (
+                        <span aria-hidden="true" className="absolute left-9 right-[-0.5rem] top-[0.7rem] h-px bg-gradient-to-r from-teal-300/40 to-blue-300/20 sm:left-10" />
+                      )}
+                      <div className="relative flex h-6 w-6 items-center justify-center rounded-full border border-teal-300/25 bg-[#0b1220] font-mono text-[9px] text-teal-200">
+                        {step.number}
+                      </div>
+                      <p className="mt-2 text-[11px] font-semibold text-white">{step.title}</p>
+                      <p className="mt-1 pr-1 text-[9px] leading-4 text-gray-500 sm:text-[10px]">{step.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
                 {skillTags.map((tag) => (
                   <span
                     key={tag}
