@@ -1,11 +1,7 @@
 services:
-
-- type: web
-  name: khaliletanamohweb
-  runtime: node
-  plan: free
-  buildCommand: npm install && npm run build
-  startCommand: npm start
-  envVars:
-  - key: NODE_ENV
-    value: production
+  - type: web
+    name: khalil-etana-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
